@@ -23,6 +23,9 @@
           <% if result.searchable_type == "Movie" %>
               <h4>Movie title: <%= result.searchable.title %></h4>
               <p>Movie syllabus: <%= result.searchable.syllabus %></p>
+              <p>Director first_name: <%= result.searchable.director.first_name %></p>
+              <p>Director last_name: <%= result.searchable.director.last_name %></p>
+
             <% elsif result.searchable_type == "TvShow" %>
               <h4>TvShow title:<%= result.searchable.title %></h4>
               <h4>TvShow syllabus:<%= result.searchable.syllabus %></h4>
