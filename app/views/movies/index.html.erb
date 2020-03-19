@@ -1,0 +1,50 @@
+<h1>Movies#index</h1>
+<p>Find me in app/views/movies/index.html.erb</p>
+
+
+
+<div class="container">
+<%= form_tag movies_path, method: :get do %>
+  <%= text_field_tag :query,
+    params[:query],
+    class: "form-control",
+    placeholder: "Find a movie"
+  %>
+  <%= submit_tag "Search", class: "btn btn-primary" %>
+<% end %>
+
+<!-- With PgSearch and tables not associated: looking through the 3 tables -->
+<% if params[:query] %>
+  <div class="row">
+    <div class="col-sm-8 offset-sm-2">
+      <div id="movies">
+        <%= @results.count %>
+        <% @results.each do |result| %>
+          <% if result.searchable_type == "Movie" %>
+              <h4>Movie title: <%= result.searchable.title %></h4>
+              <p>Movie syllabus: <%= result.searchable.syllabus %></p>
+            <% elsif result.searchable_type == "TvShow" %>
+              <h4>TvShow title:<%= result.searchable.title %></h4>
+              <h4>TvShow syllabus:<%= result.searchable.syllabus %></h4>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+
+  <% else %>
+
+    <div class="row">
+    <div class="col-sm-8 offset-sm-2">
+      <div id="movies">
+        <%= @movies.count %>
+        <% @movies.each do |movie| %>
+          <h4><%= movie.title %></h4>
+          <p><%= movie.syllabus %></p>
+        <% end %>
+      </div>
+    </div>
+  </div>
+  <% end %>
+
+</div>
